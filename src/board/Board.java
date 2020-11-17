@@ -1,5 +1,4 @@
 package board;
-
 import javafx.scene.Group;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class Board extends Group {
         super.getChildren().addAll(squares);
     }
 
+/*
     public Board putToken(Token token) {
         return searchBoardAndUpdateWithValue(token, token.getTokenId());
     }
@@ -30,6 +30,7 @@ public class Board extends Group {
 
         return searchBoardAndUpdateWithValue(token, -1);
     }
+*/
 
     public Square[][] getBoardState() {
         return mBoardState;
@@ -64,6 +65,7 @@ public class Board extends Group {
         return null;
     }
 
+/*
     private Board searchBoardAndUpdateWithValue(Token token, int value) {
 
         List<Square> squares = token.getShape();
@@ -74,4 +76,5 @@ public class Board extends Group {
         }
         return new Board(mBoardState, mGridSize);
     }
+*/
 }

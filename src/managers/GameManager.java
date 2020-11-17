@@ -12,18 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
-    private ViewManager mViewManager;
+    private final ViewManager mViewManager;
     private MoveFactory mMoveFactory;
-    private Board mBoard;
-    private BoardManager mBoardManager;
+    private final BoardManager mBoardManager;
     private Request mRequest;
 
     public GameManager() {
 
         // TODO: board size will be hard coded for now, but it
         //  can be impelemented as gui screen later
-        mBoardManager = new BoardManager(5, 100);
-        mBoard = mBoardManager.getBoard();
+        mBoardManager = new BoardManager(5);
 
         mViewManager = new ViewManager(this);
         mMoveFactory = new MoveFactory(this);
@@ -45,22 +43,18 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
 
     @Override
     public Node getBoardNode() {
-        return mBoard;
+        return mBoardManager.getBoard();
     }
 
     @Override
     public List<Node> getOutsideTokensNodes() {
-        // TODO: implement this
-        return null;
+        return new ArrayList<>(mBoardManager.getOutsideTokens());
     }
 
 
     @Override
     public List<Node> getFreeCells() {
-        List<Square> squares = mBoard.getFreeCells();
-        List<Node> nodes = new ArrayList<>(squares);
-
-        return nodes;
+        return new ArrayList<>(mBoardManager.getFreeCells());
     }
 
     @Override

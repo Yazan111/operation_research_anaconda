@@ -9,9 +9,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
 
 public class Square extends StackPane{
+    private static int sTokenSquareSize = 50;
+    private static int sBoardSquareSize = 100;
+    private static int sTokenId = 0;
+
     private int mLeftMagnitude;
     private int mRightMagnitude;
     private int mTopMagnitude;
@@ -19,29 +22,57 @@ public class Square extends StackPane{
     private Image mImage;
     private int mSquareId;
     private int mTokenId;
-    private int mSquareSize;
 
-    public Square(Image image, int tokenId) {
-        mSquareSize = 100;
-        Random random = new Random();
-        // this will generate a number between 1 and 100
-        mSquareId = random.nextInt(100) + 1;
+
+    public static Square getBoardSquare(Image image, int squareId) {
+        return new Square(image, squareId, sBoardSquareSize);
+    }
+
+    public static Square getTokenSquare(Image image) {
+        return new Square(image, sTokenSquareSize);
+    }
+
+    private Square (Image image, int squareSize) {
+
+        initializeAttriubtes(image, squareSize);
+        mSquareId = sTokenId++;
+
+    }
+
+    // board squares
+    private Square (Image image, int squareId, int squareSize) {
+
+        initializeAttriubtes(image, squareSize);
+        mSquareId = squareId;
+    }
+
+    private void initializeAttriubtes(Image image, int squareSize) {
         mImage = image;
-        mTokenId = tokenId;
 
         ImageView imageView = new ImageView();
         imageView.setImage(image);
+        imageView.setFitHeight(squareSize);
+        imageView.setFitWidth(squareSize);
         super.getChildren().add(imageView);
 
         // related to layout
-        super.setMinWidth(mSquareSize);
-        super.setMinHeight(mSquareSize);
+        super.setStyle("-fx-border-color: black;");
+        super.setMinWidth(squareSize);
+        super.setMinHeight(squareSize);
         super.setBackground(new Background(
-                new BackgroundFill(
-                        Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY
-                    )
+                        new BackgroundFill(
+                                Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY
+                        )
                 )
-            );
+        );
+    }
+
+    public static int getBoardSquareSize(){
+        return sBoardSquareSize;
+    }
+
+    public static int getTokenSquareSize(){
+        return sTokenSquareSize;
     }
 
     public int getLeftMagnitude() {

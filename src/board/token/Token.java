@@ -1,5 +1,6 @@
-package board;
+package board.token;
 
+import board.Square;
 import javafx.scene.Group;
 
 import java.util.List;
@@ -16,12 +17,16 @@ public class Token extends Group {
         mTokenId = random.nextInt(10) + 100;
         mShape = shape;
 
+        for(int i = 0; i < mShape.size(); i ++) {
+           mShape.get(i).setTokenId(mTokenId);
+        }
         getChildren().addAll(shape);
     }
 
     public void rotate() {
         //TODO: this will be resolved after drawing the board and tokens
     }
+
 
     public List<Square> getShape() {
         return mShape;

@@ -1,10 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import managers.GameManager;
@@ -23,6 +21,7 @@ public class Main extends Application {
         root.getChildren().addAll(node);
 
         primaryStage.setScene(new Scene(root, 1000, 1000));
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

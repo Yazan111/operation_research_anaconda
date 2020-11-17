@@ -2,6 +2,7 @@ package managers;
 
 import interfaces.ViewManagerHelper;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import move.Request;
 import player.Player;
 
@@ -10,10 +11,10 @@ import java.util.List;
 
 public class ViewManager {
 
-    private ViewManagerHelper mViewManagerHelper;
+    private final ViewManagerHelper mViewManagerHelper;
     private Request mRequest;
 
-    private int mBoardShift;
+    private final int mBoardShift;
     private int mTokensShift;
 
     // note that the player class is a model class and will
@@ -23,7 +24,9 @@ public class ViewManager {
     ViewManager(ViewManagerHelper helper) {
 
         this.mViewManagerHelper = helper;
-        this.mBoardShift = 100;
+
+
+        this.mBoardShift = 50;
         this.mTokensShift = getTokensShift();
         this.mTokensShift += 50;
 
@@ -40,9 +43,8 @@ public class ViewManager {
         List<Node> nodes = new ArrayList<>();
         nodes.add(buildBoardNode());
 
-        // TODO: impelemnt for prober drawing
         if(buildTokensNodes() != null)
-            nodes.addAll(buildTokensNodes());
+            nodes.add(buildTokensNodes());
 
         return nodes;
     }
@@ -52,21 +54,20 @@ public class ViewManager {
     }
     public Node buildBoardNode() {
         Node board = mViewManagerHelper.getBoardNode();
-        board.setLayoutX(100);
-        board.setLayoutY(100);
+        board.setLayoutX(mBoardShift);
+        board.setLayoutY(mBoardShift);
 
         return board;
     }
 
-    public List<Node> buildTokensNodes() {
+    public Node buildTokensNodes() {
         List<Node> tokens = mViewManagerHelper.getOutsideTokensNodes();
-        int nodeCounter = 0;
-        int secondTokenShift = 250;
 
-        return null;
+        VBox box = new VBox();
+        box.getChildren().addAll(tokens);
+        box.setLayoutX(mTokensShift);
+        box.setLayoutY(mBoardShift);
+
+        return box;
     }
-
-
-
-
 }
