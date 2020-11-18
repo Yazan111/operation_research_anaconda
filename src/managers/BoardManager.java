@@ -4,6 +4,7 @@ import board.*;
 import board.token.Token;
 import board.token.TokenBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardManager {
@@ -39,7 +40,7 @@ public class BoardManager {
         for (int i = 0; i < boardSize; i ++)
             for (int j = 0; j < boardSize; j++) {
                 String stringTokenId =  i + "" + j;
-                int intSquareId = Integer.valueOf(stringTokenId);
+                int intSquareId = Integer.parseInt(stringTokenId);
 
                 Square square = Square.getBoardSquare(null, intSquareId);
 
@@ -54,32 +55,29 @@ public class BoardManager {
        return Square.getBoardSquareSize() * mBoard.getGridSize();
     }
 
+    public List<Square> getOutsideTokensSquare() {
+        List<Square> tokenSquare = new ArrayList<>();
+        for(Token token : mTokens)  {
+            tokenSquare.addAll(token.getShape());
+        }
 
-/*
-    public void putToken(int location, int tokenId) {
-        Token token = findTokenById(tokenId);
-        // TODO: implement
-
+        return tokenSquare;
+    }
+    public Token getTokenBySquareId(int id) {
+        List<Square> tokenSquares;
+        for(Token token : mTokens) {
+            tokenSquares = token.getShape();
+            for(Square square : tokenSquares) {
+                if(square.getTokenId() == id)
+                    return token;
+            }
+        }
+        return null;
     }
 
-    public void removeToken(int location, int tokenId) {
-        Token token = findTokenById(tokenId);
-        // TODO: implement
-
-    }
-*/
 
     public Board getBoard() {
         return mBoard;
     }
 
-/*
-    private Token findTokenById(int id){
-        for(Token token : mTokens){
-            if(token.getTokenId() == id)
-                return token;
-        }
-        return null;
-    }
-*/
 }

@@ -11,9 +11,9 @@ import javafx.scene.paint.Color;
 
 
 public class Square extends StackPane{
-    private static int sTokenSquareSize = 50;
-    private static int sBoardSquareSize = 100;
-    private static int sTokenId = 0;
+    private static final int sTokenSquareSize = 50;
+    private static final int sBoardSquareSize = 100;
+    private static int sSquareId = 1000;
 
     private int mLeftMagnitude;
     private int mRightMagnitude;
@@ -35,7 +35,7 @@ public class Square extends StackPane{
     private Square (Image image, int squareSize) {
 
         initializeAttriubtes(image, squareSize);
-        mSquareId = sTokenId++;
+        mSquareId = sSquareId++;
 
     }
 

@@ -24,7 +24,6 @@ public class Token extends Group {
     }
 
     public void rotate() {
-        //TODO: this will be resolved after drawing the board and tokens
     }
 
 
