@@ -37,23 +37,23 @@ public abstract class TokenType {
 
             switch (edge) {
                 case "down":
-                    square1.setDownMagnitude(square2.getSquareId());
-                    square2.setTopMagnitude(square1.getSquareId());
+                    square1.setDownMagnitude(square2);
+                    square2.setTopMagnitude(square1);
                     break;
 
-                case "righ":
-                    square1.setRightMagnitude(square2.getSquareId());
-                    square2.setLeftMagnitude(square1.getSquareId());
+                case "right":
+                    square1.setRightMagnitude(square2);
+                    square2.setLeftMagnitude(square1);
                     break;
 
                 case "left":
-                    square1.setLeftMagnitude(square2.getSquareId());
-                    square2.setRightMagnitude(square1.getSquareId());
+                    square1.setLeftMagnitude(square2);
+                    square2.setRightMagnitude(square1);
                     break;
 
                 case "top":
-                    square1.setTopMagnitude(square2.getSquareId());
-                    square2.setDownMagnitude(square1.getSquareId());
+                    square1.setTopMagnitude(square2);
+                    square2.setDownMagnitude(square1);
                     break;
             }
         }

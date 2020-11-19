@@ -2,6 +2,7 @@ package board;
 import javafx.scene.Group;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board extends Group {

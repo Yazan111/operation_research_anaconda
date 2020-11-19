@@ -159,7 +159,7 @@ public class ViewManager {
 
             request.setSquareId(sourceString);
             request.setLocation(target.getId());
-            request.setRequestName("move");
+            request.setRequestName("changeLocation");
 
             mViewManagerHelper.requestMove(request);
 

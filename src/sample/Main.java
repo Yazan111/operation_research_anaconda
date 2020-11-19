@@ -21,7 +21,7 @@ public class Main extends Application {
         root.getChildren().addAll(node);
 
         primaryStage.setScene(new Scene(root, 1000, 1000));
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

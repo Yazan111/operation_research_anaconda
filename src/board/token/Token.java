@@ -7,15 +7,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Token extends Group {
+    private static int sTokenId = 0;
+
     private List<Square> mShape;
     private boolean mMovable;
     private int mTokenId;
 
     public Token(List<Square> shape) {
-        Random random = new Random();
-        // this will generate a number between 100 and 109
-        mTokenId = random.nextInt(10) + 100;
+
         mShape = shape;
+        mTokenId = sTokenId++;
 
         for(int i = 0; i < mShape.size(); i ++) {
            mShape.get(i).setTokenId(mTokenId);

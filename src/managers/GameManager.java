@@ -1,8 +1,10 @@
 package managers;
 
 import board.Board;
+import board.BoardGenerator;
 import board.Square;
 import board.token.Token;
+import interfaces.Move;
 import interfaces.MoveFactoryHelper;
 import interfaces.ViewManagerHelper;
 import javafx.scene.Node;
@@ -18,6 +20,7 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
     private final ViewManager mViewManager;
     private MoveFactory mMoveFactory;
     private final BoardManager mBoardManager;
+    private BoardGenerator mBoardGenerator;
     private Request mRequest;
 
     public GameManager() {
@@ -27,21 +30,26 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
     }
 
     // MoveFactoryHelper methods
-    @Override
-    public Request getRequest() {
-        return mRequest;
-    }
-    @Override
-    public Token getToken() {
-        String id = mRequest.getSquareId();
-        int integerId = Integer.getInteger(id);
 
-        return mBoardManager.getTokenBySquareId(integerId);
+    @Override
+    public Square getSourceLocation() {
+        String sourceLocation = mRequest.getSquareId();
+        int squareId = Integer.parseInt(sourceLocation);
+
+        return mBoardManager.findSquareById(squareId);
     }
 
     @Override
-    public Board getBoardMoveFactory() {
-        return mBoardManager.getBoard();
+    public Square getTargetedLocation() {
+        String targetedLocation = mRequest.getLocation();
+        int squareId = Integer.parseInt(targetedLocation);
+
+        return mBoardManager.findSquareById(squareId);
+    }
+
+    @Override
+    public String getActionName() {
+        return mRequest.getRequestName();
     }
 
 
@@ -54,7 +62,8 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
     @Override
     public void requestMove(Request request) {
         mRequest = request;
-        System.out.println(request);
+        Move move = mMoveFactory.createMove();
+        move.doAction();
     }
 
     @Override
@@ -104,4 +113,5 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
     public List<Node> getViewNodes() {
         return mViewManager.updateNodes();
     }
+
 }

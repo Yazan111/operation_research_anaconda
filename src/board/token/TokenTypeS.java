@@ -16,7 +16,7 @@ public class TokenTypeS extends TokenType{
     public List<Token> getTokens() {
         List<Token> tokens = new ArrayList<>();
         Token token_n = buildToken(mnImage, mnEdges);
-        Token token_nr90 = buildToken(mnImage, mnEdges);
+        Token token_nr90 = buildToken(mnImage, mnr90Edges);
 
         rotateAndFlipToken("n", token_n.getShape());
         rotateAndFlipToken("nr90", token_nr90.getShape());

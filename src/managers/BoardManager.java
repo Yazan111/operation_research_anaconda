@@ -11,7 +11,7 @@ public class BoardManager {
     private Board mBoard;
     private final List<Token> mTokens;
     private final TokenBuilder mTokenBuilder;
-    private BoardHistory mBoardHistory;
+    private BoardGenerator mBoardGenerator;
     private final List<Token> mOutsideTokens;
 
     BoardManager(int boardSize) {
@@ -44,15 +44,38 @@ public class BoardManager {
 
                 Square square = Square.getBoardSquare(null, intSquareId);
 
-                square.setLayoutX(i * size);
-                square.setLayoutY(j * size);
+                square.setLayoutX(j * size);
+                square.setLayoutY(i * size);
+
+
 
                 board[i][j] = square;
             }
+        for (int i = 0; i < boardSize; i ++)
+            for (int j = 0; j < boardSize; j++) {
+
+                board[i][j].setTokenId(-1);
+                int upRow = i - 1;
+                int downRow = i + 1;
+                int leftColumn = j - 1;
+                int rightColumn = j + 1;
+                if (upRow >= 0)
+                    board[i][j].setTopMagnitude(board[upRow][j]);
+
+                if (downRow < boardSize)
+                    board[i][j].setDownMagnitude(board[downRow][j]);
+
+                if (leftColumn >= 0)
+                    board[i][j].setLeftMagnitude(board[i][leftColumn]);
+
+                if (rightColumn < boardSize)
+                    board[i][j].setRightMagnitude(board[i][rightColumn]);
+            }
+
         mBoard = new Board(board, boardSize);
     }
     public int getBoardWidth() {
-       return Square.getBoardSquareSize() * mBoard.getGridSize();
+        return Square.getBoardSquareSize() * mBoard.getGridSize();
     }
 
     public List<Square> getOutsideTokensSquare() {
@@ -63,15 +86,22 @@ public class BoardManager {
 
         return tokenSquare;
     }
-    public Token getTokenBySquareId(int id) {
-        List<Square> tokenSquares;
+
+    public Square findSquareById(int id) {
+        List<Square> allSquares = new ArrayList<>();
         for(Token token : mTokens) {
-            tokenSquares = token.getShape();
-            for(Square square : tokenSquares) {
-                if(square.getTokenId() == id)
-                    return token;
-            }
+            List<Square> tokenSquares = token.getShape();
+            allSquares.addAll(tokenSquares);
         }
+        for(int i = 0; i < mBoard.getGridSize(); i ++)
+            for(int j = 0; j < mBoard.getGridSize(); j ++)
+                allSquares.add(mBoard.getBoardState()[i][j]);
+
+        for(Square square : allSquares) {
+            if(square.getSquareId() == id)
+                return square;
+        }
+
         return null;
     }
 

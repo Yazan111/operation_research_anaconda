@@ -15,10 +15,10 @@ public class Square extends StackPane{
     private static final int sBoardSquareSize = 100;
     private static int sSquareId = 1000;
 
-    private int mLeftMagnitude;
-    private int mRightMagnitude;
-    private int mTopMagnitude;
-    private int mDownMagnitude;
+    private Square mLeftMagnitude;
+    private Square mRightMagnitude;
+    private Square mTopMagnitude;
+    private Square mDownMagnitude;
     private Image mImage;
     private int mSquareId;
     private int mTokenId;
@@ -75,35 +75,35 @@ public class Square extends StackPane{
         return sTokenSquareSize;
     }
 
-    public int getLeftMagnitude() {
+    public Square getLeftMagnitude() {
         return mLeftMagnitude;
     }
 
-    public void setLeftMagnitude(int leftMagnitude) {
+    public void setLeftMagnitude(Square leftMagnitude) {
         mLeftMagnitude = leftMagnitude;
     }
 
-    public int getRightMagnitude() {
+    public Square getRightMagnitude() {
         return mRightMagnitude;
     }
 
-    public void setRightMagnitude(int rightMagnitude) {
+    public void setRightMagnitude(Square  rightMagnitude) {
         mRightMagnitude = rightMagnitude;
     }
 
-    public int getTopMagnitude() {
+    public Square  getTopMagnitude() {
         return mTopMagnitude;
     }
 
-    public void setTopMagnitude(int topMagnitude) {
+    public void setTopMagnitude(Square  topMagnitude) {
         mTopMagnitude = topMagnitude;
     }
 
-    public int getDownMagnitude() {
+    public Square  getDownMagnitude() {
         return mDownMagnitude;
     }
 
-    public void setDownMagnitude(int downMagnitude) {
+    public void setDownMagnitude(Square  downMagnitude) {
         mDownMagnitude = downMagnitude;
     }
 
@@ -113,6 +113,7 @@ public class Square extends StackPane{
 
     public void setImage(Image image) {
         mImage = image;
+        ((ImageView)this.getChildren().get(0)).setImage(mImage);
     }
 
     public int getSquareId() {
@@ -130,4 +131,5 @@ public class Square extends StackPane{
     public void setTokenId(int tokenId) {
         mTokenId = tokenId;
     }
+
 }
