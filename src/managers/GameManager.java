@@ -1,9 +1,7 @@
 package managers;
 
-import board.Board;
 import board.BoardGenerator;
 import board.Square;
-import board.token.Token;
 import interfaces.Move;
 import interfaces.MoveFactoryHelper;
 import interfaces.ViewManagerHelper;
@@ -51,8 +49,6 @@ public class GameManager implements MoveFactoryHelper, ViewManagerHelper {
     public String getActionName() {
         return mRequest.getRequestName();
     }
-
-
 
 
 

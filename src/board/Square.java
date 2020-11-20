@@ -24,6 +24,9 @@ public class Square extends StackPane{
     private int mTokenId;
 
 
+    private int mSquareSize;
+
+
     public static Square getBoardSquare(Image image, int squareId) {
         return new Square(image, squareId, sBoardSquareSize);
     }
@@ -34,14 +37,15 @@ public class Square extends StackPane{
 
     private Square (Image image, int squareSize) {
 
+        mSquareSize = squareSize;
         initializeAttriubtes(image, squareSize);
         mSquareId = sSquareId++;
-
     }
 
     // board squares
     private Square (Image image, int squareId, int squareSize) {
 
+        mSquareSize = squareSize;
         initializeAttriubtes(image, squareSize);
         mSquareId = squareId;
     }
@@ -130,6 +134,14 @@ public class Square extends StackPane{
 
     public void setTokenId(int tokenId) {
         mTokenId = tokenId;
+    }
+
+    public int getSquareSize() {
+        return mSquareSize;
+    }
+
+    public Square getACopy() {
+        return new Square(this.getImage(), this.getSquareId(), this.getSquareSize());
     }
 
 }
